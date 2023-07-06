@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const last_posts = posts.slice(0, 3);
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-xl py-1">Hey there 👋</div>
+    <div class="text-5xl font-bold">I'm Daria Gorchylina</div>
+    <div class="text-3xl py-3 font-bold">Software Engineer & Engineering manager</div>
+    <div class="py-2 pb-2">
+      <text class="text-lg ">
+        As a passionate engineer and forward-thinking leader, I am dedicated to
+        creating innovative products that drive business growth and success.
+        With a strong foundation in software engineering, I have a track record
+        of developing successful products that have achieved excellent results.
+      </text>
+
+      </div>
+      <div class="py-2">
+
+      <text class="text-lg">
+        In addition to my technical expertise, I am also a dynamic leader who
+        can inspire and motivate cross-functional teams to achieve their best
+        work. I am constantly seeking new challenges and opportunities to make a
+        positive impact through my work⚡️
+      </text>
+    </div>
+    <div class="mt-8">
+      <a class="btn" href="https://www.linkedin.com/in/dariagorchylina/" target="_blank">
+        Let's connect!</a
+      >
+     <!-- <a
+        href=""
+        target="_blank"
+        class="btn btn-outline ml-5"
+      >
+        Smth else
+      </a> -->
+    </div>
+  </div>
+
+  <!-- <div>
+    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
+  </div>
+
+  <HorizontalCard
+    title="Demo Project 1"
+    img="/post_img.webp"
+    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    url="#"
+    badge="NEW"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Demo Project 2"
+    img="/post_img.webp"
+    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    url="#"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Demo Project 3"
+    img="/post_img.webp"
+    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    url="#"
+    badge="FOSS"
+  />
+   -->
+
+  <!-- <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+  </div>
+
+  {
+    last_posts.map((post) => (
+      <>
+        <HorizontalCard
+          title={post.data.title}
+          img={post.data.heroImage}
+          desc={post.data.description}
+          url={"/blog/" + post.slug}
+          target="_self"
+          badge={post.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
+  -->
+</BaseLayout>
