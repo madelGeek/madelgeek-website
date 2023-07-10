@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
-import { fetchArticles } from "../../lib/getArticles";
+import { fetchArticles } from "../lib/getArticles";
 
 export async function get(context) {
   const articles = await fetchArticles();
