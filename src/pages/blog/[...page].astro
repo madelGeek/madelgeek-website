@@ -5,7 +5,8 @@ import { fetchArticles } from "../../lib/getArticles";
 
 export async function getStaticPaths({ paginate }) {
   const articles = await fetchArticles();
-  articles.sort((a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf());
+  console.log('!! articles', articles)
+  articles.sort((a, b) => b?.data?.published_at.valueOf() - a?.data?.published_at.valueOf());
   return paginate(articles, { pageSize: 10 });
 }
 

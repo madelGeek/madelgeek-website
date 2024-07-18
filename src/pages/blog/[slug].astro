@@ -1,5 +1,5 @@
 ---
-import Markdown from "@astrojs/markdown-component";
+import { Markdown } from 'astro-remote';
 import PostLayout from '../../layouts/PostLayout.astro';
 import { fetchArticles } from "../../lib/getArticles";
 
@@ -18,6 +18,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { title, description, cover_image, published_at, edited_at, badge, body_markdown } = Astro.props;
+const { Content } = body_markdown;
 ---
 <PostLayout 
     title={title}

@@ -7,12 +7,20 @@ const { title, description, pubDate, updatedDate, coverImage, badge } =
   Astro.props;
 dayjs.extend(localizedFormat);
 const displayDate = dayjs(pubDate).format("ll");
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 ---
 
 <BaseLayout title={title} description={description} image={coverImage}>
   <main class="md:flex md:justify-center">
     <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
+      <a href="/blog/" target="_self" class="no-underline">
+      <button type="button" class="w-full flex items-center w-1/2 py-2 text-sm text-gray-700 transition-colors duration-200 rounded-lg gap-x-2 sm:w-auto hover:text-gray-500 dark:text-gray-400">
+        <svg class="w-5 h-5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+        </svg>
+        <span>back</span>
+      </button>
+      </a>
       {
         coverImage && (
         <Image
