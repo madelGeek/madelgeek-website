@@ -12,8 +12,18 @@ const { image, title = SITE_TITLE, description = SITE_DESCRIPTION, includeSideba
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDES8FS6H4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TDES8FS6H4');
+    </script>
     <BaseHead title={title} description={description} image={image} />
   </head>
+
   <body>
     <div class="bg-base-100 drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
