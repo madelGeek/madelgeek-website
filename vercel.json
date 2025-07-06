@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "src/pages/**/*.astro": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "buildCommand": "yarn run build",
+  "outputDirectory": "dist",
+  "framework": "astro",
+  "env": {
+    "NODE_VERSION": "20.19.2"
+  }
+} 
