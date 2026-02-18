@@ -1,6 +1,8 @@
 ---
 const { title, img, desc, url, badge, tags, target = "_blank" } = Astro.props;
 import { Image } from "astro:assets";
+
+const isRemoteImg = typeof img === "string" && (img.startsWith("http://") || img.startsWith("https://"));
 ---
 
 <div
@@ -10,15 +12,26 @@ import { Image } from "astro:assets";
     <div class="hero-content flex-col md:flex-row">
       {
         img && (
-          <Image
-            src={img}
-            aspectRatio={"16:9"}
-            width={250}
-            height={140}
-            format="webp"
-            alt={title}
-            class="max-w-full md:max-w-[13rem] rounded-lg"
-          />
+          isRemoteImg ? (
+            <img
+              src={img}
+              width={250}
+              height={140}
+              alt={title}
+              class="max-w-full md:max-w-[13rem] rounded-lg object-cover aspect-video"
+              loading="lazy"
+            />
+          ) : (
+            <Image
+              src={img}
+              aspectRatio={"16:9"}
+              width={250}
+              height={140}
+              format="webp"
+              alt={title}
+              class="max-w-full md:max-w-[13rem] rounded-lg"
+            />
+          )
         )
       }
       <div class="grow w-full">

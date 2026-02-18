@@ -153,7 +153,9 @@ Where you need to define your content collections, we define our content schemas
 
 #### Blog
 
-Add your `md` blog post in the `/content/blog/` folder.
+The blog pulls posts from **Substack** (see `src/lib/getArticles.ts`). Posts are fetched from Substack on every build; no cache is used.
+
+Add your `md` blog post in the `/content/blog/` folder only if you are not using Substack.
 
 ##### Post format
 

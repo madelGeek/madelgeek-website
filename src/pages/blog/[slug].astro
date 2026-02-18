@@ -1,31 +1,36 @@
 ---
-import { Markdown } from 'astro-remote';
 import PostLayout from '../../layouts/PostLayout.astro';
-import { fetchArticles } from "../../lib/getArticles";
+import { fetchArticles, fetchArticleBySlug } from "../../lib/getArticles";
 
 export async function getStaticPaths() {
 	const articles = await fetchArticles();
 
-	const paths = articles.map((article) => ({
-		params: {
-			slug: article.slug,
-		},
-		props: article,
-	}));
+	const paths = await Promise.all(
+		articles.map(async (article) => {
+			const full = await fetchArticleBySlug(article.slug);
+			if (!full) return null;
+			return {
+				params: { slug: article.slug },
+				props: full,
+			};
+		})
+	);
 
-	return paths;
+	return paths.filter(Boolean);
 }
 
-const { slug } = Astro.params;
-const { title, description, cover_image, published_at, edited_at, badge, body_markdown } = Astro.props;
-const { Content } = body_markdown;
+const { title, description, cover_image, data, updated_at, badge, body_html } = Astro.props;
+const published_at = data.published_at;
 ---
-<PostLayout 
-    title={title}
-    description={description}
-    pubDate={published_at}
-    coverImage={cover_image}
-    updatedDate={edited_at}
-    badge={badge}>
-    <Markdown content={body_markdown}/>
+<PostLayout
+	title={title}
+	description={description}
+	pubDate={published_at}
+	coverImage={cover_image}
+	updatedDate={updated_at}
+	badge={badge}
+>
+	{body_html && (
+		<div class="post-body" set:html={body_html} />
+	)}
 </PostLayout>

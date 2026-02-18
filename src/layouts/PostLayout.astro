@@ -3,11 +3,9 @@ import BaseLayout from "./BaseLayout.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
-const { title, description, pubDate, updatedDate, coverImage, badge } =
-  Astro.props;
+const { title, description, pubDate, coverImage, badge } = Astro.props;
 dayjs.extend(localizedFormat);
 const displayDate = dayjs(pubDate).format("ll");
-import { Image } from "astro:assets";
 ---
 
 <BaseLayout title={title} description={description} image={coverImage}>
@@ -23,14 +21,12 @@ import { Image } from "astro:assets";
       </a>
       {
         coverImage && (
-        <Image
-            aspectRatio={"16:9"}
-            width={750}
-            height={422}
-            format="webp"
+          <img
             src={coverImage}
             alt={title}
-            class="w-full mb-6"
+            class="w-full mb-6 rounded-lg object-cover aspect-video"
+            loading="eager"
+            fetchpriority="high"
           />
         )
       }
@@ -38,14 +34,6 @@ import { Image } from "astro:assets";
       {pubDate && <time>{displayDate}</time>}
       <br />
       {badge && <div class="badge badge-secondary my-1">{badge}</div>}
-      {
-        updatedDate && (
-          <div>
-            {" "}
-            Last updated on <time>{updatedDate}</time>{" "}
-          </div>
-        )
-      }
       <div class="divider my-2"></div>
       <slot />
     </article>
