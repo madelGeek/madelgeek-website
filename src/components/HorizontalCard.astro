@@ -1,8 +1,11 @@
 ---
-const { title, img, desc, url, badge, tags, target = "_blank" } = Astro.props;
+const { title, img, desc, url, badge, tags, date, target = "_blank" } = Astro.props;
 import { Image } from "astro:assets";
 
 const isRemoteImg = typeof img === "string" && (img.startsWith("http://") || img.startsWith("https://"));
+const displayDate = date
+  ? new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
+  : null;
 ---
 
 <div
@@ -35,10 +38,13 @@ const isRemoteImg = typeof img === "string" && (img.startsWith("http://") || img
         )
       }
       <div class="grow w-full">
-        <h1 class="text-xl font-bold">
-          {title}
-          {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-        </h1>
+        <div class="flex justify-between items-start gap-4">
+          <h1 class="text-xl font-bold">
+            {title}
+            {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
+          </h1>
+          {displayDate && <span class="text-sm text-base-content/50 whitespace-nowrap pt-1">{displayDate}</span>}
+        </div>
         <p class="py-1 text-1xl">{desc}</p>
         <div class="card-actions justify-end">
           {

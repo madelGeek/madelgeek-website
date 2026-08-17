@@ -29,11 +29,11 @@ const { page } = Astro.props;
           <>
             <HorizontalCard
               title={post.title}
-              img={post.cover_image}
               desc={post.description}
               url={"/blog/" + post.slug}
               target="_self"
               badge={post.badge}
+              date={post.data.published_at}
             />
             <div class="divider my-0" />
           </>
